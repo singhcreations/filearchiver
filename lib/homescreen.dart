@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'custom_text.dart';
+import 'custommodel.dart';
 import 'package:path_provider/path_provider.dart' as path_prosvider;
 
 class HomeScreen extends StatefulWidget {
@@ -13,12 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _filetext = '';
+  String _filetext = 'assets/your_file.7z';
   String _openfile = '';
 
   @override
   void initState() {
     super.initState();
+    extractfile();
     setState(() {});
   }
 
@@ -60,28 +63,88 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.center,
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color: Colors.green[400],
-                  borderRadius: BorderRadius.circular(15)),
-              child: Column(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        extractfile();
-                        setState(() {});
-                      },
-                      child: const Text("Extract Files")),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            ListView.builder(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                itemCount: Mainlistitems.length,
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Container(
+                      padding: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                            bottom:
+                                BorderSide(width: 1, color: Colors.lightGreen)),
+                      ),
+                      child: InkWell(
+                          onTap: () async {
+                            if (index == 0) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()),
+                              );
+                              // Daily Updates
+                            } else if (index == 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()),
+                              ); // Nitnem
+                            }
+                          },
+                          child: Container(
+                            height: 50,
+                            padding: EdgeInsets.only(top: 5),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: Container(
+                                  padding: EdgeInsets.only(
+                                      left: 2, top: 5, bottom: 0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      //title
+                                      CustomText(
+                                        title: Mainlistitems[index].title,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                              ],
+                            ),
+                          )));
+                })
+
+            /////
+
+            //       Container(
+            //         alignment: Alignment.center,
+            //         height: 100,
+            //         width: MediaQuery.of(context).size.width,
+            //         padding: const EdgeInsets.all(20),
+            //         decoration: BoxDecoration(
+            //             color: Colors.green[400],
+            //             borderRadius: BorderRadius.circular(15)),
+            //         child: Column(
+            //           children: [
+            //             ElevatedButton(
+            //                 onPressed: () {
+            //                   extractfile();
+            //                   setState(() {});
+            //                 },
+            //                 child: const Text("Extract Files")),
+            //           ],
+            //         ),
+            //       ),
+            //       const SizedBox(
+            //         height: 20,
+            //       ),
           ],
         ),
       ),
