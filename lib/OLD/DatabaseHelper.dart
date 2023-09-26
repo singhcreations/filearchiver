@@ -15,12 +15,14 @@ class DatabaseHelper {
     if (_database != null) return _database!;
 
     final directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, 'my_database.db');
+    final path = join(directory.path, 'database.sqlite');
 
     _database = await openDatabase(
       path,
       version: 1,
-      onCreate: _createDatabase,
+      onCreate: (db, version) {
+        // Create your tables here if needed
+      },
     );
 
     return _database!;
@@ -28,6 +30,7 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getlines() async {
     final db = await database;
-    return await db.query('lines');
+    
+    return await db.query('bani_lines');
   }
 }

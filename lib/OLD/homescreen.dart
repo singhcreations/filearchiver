@@ -1,10 +1,11 @@
+import 'package:file/content.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'custom_text.dart';
-import 'custommodel.dart';
+import '../custom_text.dart';
+import '../custommodel.dart';
 import 'package:path_provider/path_provider.dart' as path_prosvider;
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
+// this screen refers to extraction and listview in ui on list view clcik diffrent data schow to schreen
 
 class _HomeScreenState extends State<HomeScreen> {
   String _filetext = 'assets/your_file.7z';
@@ -27,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void extractfile() async {
     debugPrint("extraction is open in this part");
-    final appDocDir = await path_prosvider.getApplicationDocumentsDirectory();
-    final destinationDir = Directory('${appDocDir.path}/thedownloadedfiles');
+    // final appDocDir = await path_prosvider.getApplicationDocumentsDirectory();
+    // final destinationDir = Directory('${appDocDir.path}/thedownloadedfiles');
 
-    Directory _directory = Directory("");
+   Directory _directory;
     _directory = await getApplicationDocumentsDirectory();
 
     //our endpoint is find so that we start our extraction method
@@ -78,18 +81,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: InkWell(
                           onTap: () async {
                             if (index == 0) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           const ContentScreen()),
+                              // );
                               // Daily Updates
                             } else if (index == 1) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()),
-                              ); // Nitnem
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           const ContentScreen()),
+                              // ); // Nitnem
                             }
                           },
                           child: Container(
@@ -120,31 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )));
                 })
-
-            /////
-
-            //       Container(
-            //         alignment: Alignment.center,
-            //         height: 100,
-            //         width: MediaQuery.of(context).size.width,
-            //         padding: const EdgeInsets.all(20),
-            //         decoration: BoxDecoration(
-            //             color: Colors.green[400],
-            //             borderRadius: BorderRadius.circular(15)),
-            //         child: Column(
-            //           children: [
-            //             ElevatedButton(
-            //                 onPressed: () {
-            //                   extractfile();
-            //                   setState(() {});
-            //                 },
-            //                 child: const Text("Extract Files")),
-            //           ],
-            //         ),
-            //       ),
-            //       const SizedBox(
-            //         height: 20,
-            //       ),
           ],
         ),
       ),

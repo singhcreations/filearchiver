@@ -1,22 +1,53 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ContentScreen extends StatefulWidget {
-  const ContentScreen({super.key});
+import 'OLD/DatabaseHelper.dart';
 
+class YourScreen extends StatefulWidget {
   @override
-  State<ContentScreen> createState() => _ContentScreenState();
+  _YourScreenState createState() => _YourScreenState();
 }
 
-class _ContentScreenState extends State<ContentScreen> {
+class _YourScreenState extends State<YourScreen> {
+  final dbHelper = DatabaseHelper();
+  List<Map<String, dynamic>> data = [];
+
   @override
   void initState() {
     super.initState();
-    setState(() {});
+    fetchData();
+  }
+
+  void fetchData() async {
+    final result = await dbHelper.getlines();
+    setState(() {
+      data = result;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Database Contents'),
+      ),
+      body: data.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                final item = data[index];
+                return ListTile(
+                  title: Text('ID: ${item['id']}'),
+                  subtitle: Text('Name: ${item['name']}'),
+                );
+              },
+            ),
+    );
   }
 }
+
+
+
+
+
