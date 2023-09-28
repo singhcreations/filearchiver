@@ -41,17 +41,15 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  
+  speech_to_text: ^6.1.0
   flutter_lints: ^2.0.0
-  flutter_archive: ^5.0.0
-  # path_provider: ^2.1.0
+  # speech_to_text: ^5.6.0
+  flutter_archive: 5.0.0
+  archive: ^3.2.0
+  path_provider: ^2.1.0
   sqflite: ^2.0.6
+  
 
   
   
@@ -67,12 +65,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - assets/your_file.7z
+  # assets:
+  #   - assets/your_file.7z
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/your_file.7z
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
