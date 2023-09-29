@@ -1,5 +1,4 @@
-//this code i vw
-
+//this code i working with if we store db inside application
 
 import 'dart:io';
 import 'dart:typed_data';
