@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:archive/archive.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'display.dart';
+
 class YourScreen3 extends StatefulWidget {
   @override
   _YourScreen3State createState() => _YourScreen3State();
@@ -40,13 +42,18 @@ class _YourScreen3State extends State<YourScreen3> {
             isExtracted
                 ? Text('ZIP file decompressed successfully.')
                 : Text('Decompressing ZIP file...'),
+                
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context) =>  YourScreen2()),);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Display1()),
+                );
                 // Handle button tap here
               },
-              child: Text('Your Button Text'),
+              child: Text('watch display content'),
+              
             ),
           ],
         ),
@@ -58,8 +65,8 @@ class _YourScreen3State extends State<YourScreen3> {
 Future<void> decompressZipFile() async {
   try {
     final appDir = await getApplicationDocumentsDirectory();
-    final zipFile = File('${appDir.path}/your_file.7z');
-    final ByteData data = await rootBundle.load('assets/your_file.7z');
+    final zipFile = File('${appDir.path}/NEWDB.zip');
+    final ByteData data = await rootBundle.load('assets/NEWDB.zip');
     final buffer = data.buffer.asUint8List();
     await zipFile.writeAsBytes(buffer);
 
@@ -77,6 +84,7 @@ Future<void> decompressZipFile() async {
     }
 
     print("ZIP file decompressed successfully.");
+    // print(await getDatabasesPath());
   } catch (e) {
     print("Error decompressing ZIP file: $e");
   }

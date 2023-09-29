@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'OLD/DatabaseHelper.dart';
 
 class YourScreen2 extends StatefulWidget {
-  String zipefilepath = 'assets/your_file.7z';
+  String zipefilepath = 'assets/NEWDB.zip';
   @override
   _YourScreen2State createState() => _YourScreen2State();
 }
@@ -50,8 +49,9 @@ class _YourScreen2State extends State<YourScreen2> {
 
 Future<void> decompressZipFile() async {
   final appDir = await getApplicationDocumentsDirectory();
-  final zipFile1 = File('${appDir.path}/your_file.7z');
-  final ByteData data = await rootBundle.load('assets/your_file.7z');
+  final zipFile1 = File('${appDir.path}/NEWDB.zip');
+  final ByteData data = await rootBundle.load('assets/NEWDB.zip');
+
   final buffer = data.buffer.asUint8List();
   await zipFile1.writeAsBytes(buffer);
 
