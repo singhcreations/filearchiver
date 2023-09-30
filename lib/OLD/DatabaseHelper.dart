@@ -10,8 +10,8 @@ import 'package:path/path.dart';
 class DatabaseHelper {
   Database? _database;
 
-  Future<void> initializeDatabase() async {
-    final String path = join(await getDatabasesPath(), 'database.sqlite');
+  Future<void> initializeDatabase(String path) async {
+    //final String path = join(await getDatabasesPath(), 'database.sqlite');
     _database = await openDatabase(path, version: 1, onCreate: _createDatabase);
   }
 

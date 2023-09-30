@@ -42,7 +42,6 @@ class _YourScreen3State extends State<YourScreen3> {
             isExtracted
                 ? Text('ZIP file decompressed successfully.')
                 : Text('Decompressing ZIP file...'),
-                
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -53,39 +52,42 @@ class _YourScreen3State extends State<YourScreen3> {
                 // Handle button tap here
               },
               child: Text('watch display content'),
-              
             ),
           ],
         ),
       ),
     );
   }
-}
 
-Future<void> decompressZipFile() async {
-  try {
-    final appDir = await getApplicationDocumentsDirectory();
-    final zipFile = File('${appDir.path}/NEWDB.zip');
-    final ByteData data = await rootBundle.load('assets/NEWDB.zip');
-    final buffer = data.buffer.asUint8List();
-    await zipFile.writeAsBytes(buffer);
+  Future<void> decompressZipFile() async {
+    try {
+      final appDir = await getApplicationDocumentsDirectory();
+      final zipFile = File('${appDir.path}/NEWDB.zip');
+      final ByteData data = await rootBundle.load('assets/NEWDB.zip');
+      final buffer = data.buffer.asUint8List();
 
-    final archive =
-        ZipDecoder().decodeBytes(File(zipFile.path).readAsBytesSync());
-    for (final file in archive) {
-      final filename = '${appDir.path}/${file.name}';
-      if (file.isFile) {
-        File(filename)
-          ..createSync(recursive: true)
-          ..writeAsBytesSync(file.content);
-      } else {
-        Directory(filename)..create(recursive: true);
+      var res = await zipFile.writeAsBytes(buffer);
+      print(res);
+      final archive =
+      ZipDecoder().decodeBytes(File(zipFile.path).readAsBytesSync());
+      for (final file in archive) {
+        final filename = '${appDir.path}/${file.name}';
+        if (file.isFile) {
+          File(filename)
+            ..createSync(recursive: true)
+            ..writeAsBytesSync(file.content);
+        } else {
+          Directory(filename)..create(recursive: true);
+        }
       }
-    }
 
-    print("ZIP file decompressed successfully.");
-    // print(await getDatabasesPath());
-  } catch (e) {
-    print("Error decompressing ZIP file: $e");
+      print("ZIP file decompressed successfully.");
+      // print(await getDatabasesPath());
+    } catch (e) {
+      print("Error decompressing ZIP file: $e");
+    }
   }
+
 }
+
+

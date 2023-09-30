@@ -15,10 +15,12 @@ class _Display1State extends State<Display1> {
   @override
   void initState() {
     super.initState();
-    dbHelper.initializeDatabase().then((_) {
+    dbHelper
+        .initializeDatabase(
+            '/data/user/0/com.example.file/app_flutter/database.sqlite')
+        .then((_) {
       _fetchData();
-    }
-    );
+    });
   }
 
   Future<void> _fetchData() async {
@@ -29,22 +31,22 @@ class _Display1State extends State<Display1> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Display Content'),
       ),
-      body: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(data[index]['name_english']),
-          );
-        },
-      ),
+      body: data.isNotEmpty
+          ? ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(data[index]['name_english']),
+                );
+              },
+            )
+          : Container(),
     );
   }
 }
