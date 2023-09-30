@@ -38,3 +38,11 @@ List<CustomModel> ShortBanilistitems = [
     title: "Anand Sahib",
   ),
 ];
+
+List<CustomModel> amritvelaWakeUpCallScreenList = [
+  CustomModel(
+      title: "GSSG", subTitle: "title in hindi", description: "decription"),
+  CustomModel(
+      title: "DGSJ", subTitle: "title in hindi", description: "decription"),
+      
+];
